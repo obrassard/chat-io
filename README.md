@@ -1,6 +1,7 @@
 # chatio
 
 A chat room experiment with socket.io
+https://obrassard-socketio-test.herokuapp.com
 
 ## Requirements 
 
