@@ -65,6 +65,9 @@ var app = new Vue({
             let usr = sessionStorage.getItem('username');
             if (!usr){
                 usr = prompt('What is your name ?');
+                if (usr == null || usr == "") {
+                    usr = `user-${Math.floor(Math.random() * 1000)}`
+                }
                 sessionStorage.setItem('username', usr);
             }
             return usr;
