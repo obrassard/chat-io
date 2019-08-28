@@ -86,6 +86,7 @@ form button:hover {
 }
 #messages div.message-wrapper.blue .message-bubble {
   color: white;
+  font-size: 15px;
   background: #0074f8;
   border: 1px solid #035ec7;
   margin-left: auto;
