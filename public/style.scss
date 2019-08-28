@@ -60,6 +60,7 @@ form {
 
         div.message-bubble {
             text-align: right;
+            font-size: 15px;
             border-radius: 15px;
             padding: 8px 15px;
             width: fit-content;
@@ -87,7 +88,6 @@ form {
         &.blue {
             .message-bubble {
                 color: white;
-                font-size: 15px;
                 background: rgb(0, 116, 248);
                 border: 1px solid rgb(3, 94, 199);
                 margin-left:auto; 
@@ -101,7 +101,6 @@ form {
 
         &.inline {
             .message-bubble {
-                font-size: 15px;
                 color: rgb(63, 63, 63);;
                 margin:auto; 
             }

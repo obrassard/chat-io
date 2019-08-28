@@ -66,6 +66,7 @@ form button:hover {
 }
 #messages div.message-wrapper div.message-bubble {
   text-align: right;
+  font-size: 15px;
   border-radius: 15px;
   padding: 8px 15px;
   width: fit-content;
@@ -86,7 +87,6 @@ form button:hover {
 }
 #messages div.message-wrapper.blue .message-bubble {
   color: white;
-  font-size: 15px;
   background: #0074f8;
   border: 1px solid #035ec7;
   margin-left: auto;
@@ -96,7 +96,6 @@ form button:hover {
   display: none;
 }
 #messages div.message-wrapper.inline .message-bubble {
-  font-size: 15px;
   color: #3f3f3f;
   margin: auto;
 }
