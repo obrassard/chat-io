@@ -2,7 +2,7 @@ const express = require('express');
 const app = express();
 const http = require('http').createServer(app);
 const io = require('socket.io')(http);
-
+const app_port = process.env.PORT || 3000
 app.use(express.static('public'));
 
 app.get('/', function(req, res){
@@ -34,6 +34,6 @@ io.on('connection', function(socket){
 
 });
 
-http.listen(3000, function(){
-  console.log('listening on *:3000');
+http.listen(app_port, function(){
+  console.log('listening on *:'+app_port);
 });
