@@ -9,7 +9,9 @@ class Message {
 
 var socket = io();
 
-var messagesList = [];
+var messagesList = [
+    new Message(null,'Welcome to this chat room', 'inline')
+];
 
 var app = new Vue({
     el: '#app',
@@ -60,10 +62,10 @@ var app = new Vue({
         },
 
         getUser(){
-            let usr = localStorage.getItem('username');
+            let usr = sessionStorage.getItem('username');
             if (!usr){
                 usr = prompt('What is your name ?');
-                localStorage.setItem('username', usr);
+                sessionStorage.setItem('username', usr);
             }
             return usr;
         },

@@ -9,7 +9,7 @@
 </head>
 <body>
 
-<div id="app">
+<div id="app" v-cloak>
   <div id="messages" v-if="messages">
       <div class="message-wrapper" :class="message.type" v-for="message in messages">
         <div class="message-sender">{{ message.sender }}</div>

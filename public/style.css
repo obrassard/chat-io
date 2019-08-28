@@ -29,6 +29,18 @@ form input {
   font-size: 17px;
   display: relative;
 }
+@media screen and (max-width: 700px) {
+  form input {
+    width: 80%;
+    margin-right: 1%;
+  }
+}
+@media screen and (max-width: 700px) {
+  form {
+    padding-bottom: 10px;
+    padding-top: 10px;
+  }
+}
 form button {
   width: 50px;
   height: 50px;
@@ -90,21 +102,14 @@ form button:hover {
 #messages div.message-wrapper.inline .message-sender {
   display: none;
 }
-
-/* #messages { list-style-type: none; margin: 0; padding: 0; }
-#messages li { padding: 5px 10px; }
-#messages li:nth-child(odd) { background: #eee; }
-
-li.self{
-    text-align: right;
+@media screen and (max-width: 700px) {
+  #messages {
+    width: 100%;
+  }
 }
 
-li.red {
-    color: darkred;
+[v-cloak] {
+  display: none;
 }
-
-li.blue {
-    color: blue;
-} */
 
 /*# sourceMappingURL=style.css.map */
