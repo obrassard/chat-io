@@ -35,5 +35,5 @@ io.on('connection', function(socket){
 });
 
 http.listen(app_port, function(){
-  console.log('listening on *:'+app_port);
+  console.log('listening on http://localhost:'+app_port);
 });
