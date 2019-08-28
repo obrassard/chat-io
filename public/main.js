@@ -57,7 +57,7 @@ $(function () {
         let usr = localStorage.getItem('username');
         if (!usr){
             usr = prompt('What is your name ?');
-            usr.setItem('username', user);
+            localStorage.setItem('username', user);
         }
         return usr;
     }
