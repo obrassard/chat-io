@@ -1,65 +1,76 @@
-$(function () {
 
-    var socket = io();
+class Message {
+    constructor(sender, text, type) {
+        this.sender = sender;
+        this.text = text;
+        this.type = type;
+    }
+}
 
-    socket.emit('join', getUser());
+var socket = io();
 
-    //Send message
-    $('form').submit(function(e){
-      e.preventDefault(); // prevents page reloading
-      
-      let msg = {
-          username: getUser(),
-          content: $('#m').val()
-      }
-      socket.emit('chat message', msg);
-      msg.username = 'You'
-      showMessage(msg, true);
-      $('#m').val(''); // clear box
-      return false;
-    });
+var messagesList = [];
 
-    socket.on('chat message', function(msg){
-        showMessage(msg, false);
-    });
+var app = new Vue({
+    el: '#app',
+    mounted: function(){
+        socket.emit('join', this.getUser());
+        this.defineSockets();
+        window.addEventListener('beforeunload', () => {
+            this.leaveRoom();
+        }, false)
+    },
+    data: {
+      messages: messagesList,
+      currentMessage: ""
+    },
+    methods: {
+        sendMessage(e) {
+            e.preventDefault();
+            let msg = new Message(this.getUser(), this.currentMessage, null);
+            socket.emit('chat message', msg);
+            msg.type = "blue";
+            this.messages.push(msg);
+            this.currentMessage = "";
+        },
 
-    socket.on('joined', function(user){
-        let message = `${user} as joined the room !`
-        showSystemMessage(message, "blue");
-    });
+        defineSockets() {
+            //Show 'Hello user' message
+            socket.on('welcome', function(msg){
+                messagesList.push(new Message(null, msg, 'inline'));;
+            });
+        
+            // Show 'Other user as join the room'
+            socket.on('joined', function(user){
+                let text = `${user} as joined the room !`
+                messagesList.push(new Message(null, text, 'inline'));
+            });
+        
+            // Show 'Other user as left the room'
+            socket.on('bye', function(user){
+                let text = `${user} as left the room, bye bye !`
+                messagesList.push(new Message(null, text, 'inline'));
+            });
 
-    socket.on('welcome', function(msg){
-        showSystemMessage(msg,"");
-    });
+            // Display new user message
+            socket.on('chat message', function(msg){
+                msg.type = "gray";
+                messagesList.push(msg)
+            });
+        },
 
-    socket.on('bye', function(user){
-        let message = `${user} as leaved the room, bye bye !`
-        showSystemMessage(message,"red");
-    });
+        getUser(){
+            let usr = localStorage.getItem('username');
+            if (!usr){
+                usr = prompt('What is your name ?');
+                localStorage.setItem('username', usr);
+            }
+            return usr;
+        },
 
-    $(window).on("beforeunload", function() {
-        socket.emit('leave', getUser());
-    })
-
-    function showMessage(message, self){
-        let mclass = ""
-        if (self) {
-           mclass = 'self'; 
+        leaveRoom() {
+            socket.emit('leave', this.getUser());
         }
-        $('#messages').append($('<li>').addClass(mclass).html(`<strong>${message.username}</strong>: ${message.content}`));
     }
+})
 
-    function showSystemMessage(message, color){
-        $('#messages').append($('<li>').addClass(color).text(message));
-    }
-
-    function getUser(){
-        let usr = localStorage.getItem('username');
-        if (!usr){
-            usr = prompt('What is your name ?');
-            localStorage.setItem('username', usr);
-        }
-        return usr;
-    }
-
-  });

@@ -1,0 +1,119 @@
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font: 13px Helvetica, Arial; }
+
+form { 
+    text-align: center;
+    background: #000; 
+    padding: 3px; 
+    position: fixed; 
+    bottom: 0; 
+    width: 100%; 
+    padding-bottom: 20px;
+    padding-top: 20px;
+
+    input { 
+        border-radius: 20px;
+        width: 40%;
+        margin: auto;
+        border: 0; 
+        padding: 10px 20px; 
+        margin-right: .5%; 
+        height: 45px;
+        font-size: 17px;
+        display: relative;
+    }
+    
+    button { 
+        width: 50px;
+        height: 50px;
+        font-size: 19px;
+        background: rgb(0, 116, 248);
+        border: 1px solid rgb(3, 94, 199);
+        color: white;
+        border: none; 
+        padding: 10px; 
+        border-radius: 50%;
+
+        &:hover {
+            background: rgb(65, 150, 247);
+        }
+    }
+}
+
+#messages {
+    width: 40%;
+    margin: auto;
+    padding-top: 20px;
+    div.message-wrapper {
+        padding: 5px 20px;
+
+        div.message-bubble {
+            text-align: right;
+            border-radius: 15px;
+            padding: 8px 15px;
+            width: fit-content;
+        }
+
+        div.message-sender {
+            width: fit-content;
+            font-size: 12px;
+            color: rgb(63, 63, 63);
+        }
+
+        &.gray {
+            .message-bubble {
+                color: rgb(27, 27, 27);
+                background: rgb(228, 228, 228);
+                border: 1px solid rgb(211, 208, 208);
+            }
+
+            .message-sender {
+                margin-left:8px;
+                margin-bottom: 3px;
+            }
+        }
+
+        &.blue {
+            .message-bubble {
+                color: white;
+                background: rgb(0, 116, 248);
+                border: 1px solid rgb(3, 94, 199);
+                margin-left:auto; 
+                margin-right:0;
+            }
+            
+            .message-sender {
+                display: none;
+            }
+        }
+
+        &.inline {
+            .message-bubble {
+                font-size: 15px;
+                color: rgb(63, 63, 63);;
+                margin:auto; 
+            }
+            
+            .message-sender {
+                display: none;
+            }
+        }
+    }
+}
+
+/* #messages { list-style-type: none; margin: 0; padding: 0; }
+#messages li { padding: 5px 10px; }
+#messages li:nth-child(odd) { background: #eee; }
+
+li.self{
+    text-align: right;
+}
+
+li.red {
+    color: darkred;
+}
+
+li.blue {
+    color: blue;
+} */
+

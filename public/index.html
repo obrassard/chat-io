@@ -8,13 +8,23 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <ul id="messages"></ul>
-  <form action="">
-    <input id="m" autocomplete="off" /><button>Send</button>
-  </form>
 
-<script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+<div id="app">
+  <div id="messages" v-if="messages">
+      <div class="message-wrapper" :class="message.type" v-for="message in messages">
+        <div class="message-sender">{{ message.sender }}</div>
+        <div class="message-bubble">{{ message.text }}</div>
+      </div>
+  </div>
+
+  <form action="">
+      <input v-model="currentMessage" autocomplete="off"/>
+      <button v-on:click="sendMessage">&rarr;</button>
+  </form>
+</div>
+
 <script src="/socket.io/socket.io.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 <script src="/main.js"></script>
 </body>
 </html>
