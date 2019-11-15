@@ -1,16 +1,32 @@
-const express = require('express');
+import express from 'express';
+import socketio from "socket.io";
+
 const app = express();
 const http = require('http').createServer(app);
-const io = require('socket.io')(http);
+const io = socketio(http);
 const app_port = process.env.PORT || 3000
+
 app.use(express.static('public'));
 
 app.get('/', function(req, res){
-  res.sendfile('public/index.html');
+  res.sendfile('public/room.html');
+});
+
+app.post('/create', function(req, res){
+  // TODO Create new session (return Session dto)
+});
+
+app.post('/join', function(req, res){
+  // TODO
 });
 
 io.on('connection', function(socket){
-    
+    let session = { uid: socket.request._query.uid,
+                    identifier: socket.request._query.session };
+    console.log(session);
+
+    // socket.disconnect();
+    // socket.emit('welcome', 'This is a pram '+ test);
     socket.on('join', function(user){
         console.log('join: ' + user);
 
@@ -31,8 +47,9 @@ io.on('connection', function(socket){
     socket.on('chat message', function(msg){
         socket.broadcast.emit('chat message', msg);
     });
-
 });
+
+// TODO Clear expired sessions
 
 http.listen(app_port, function(){
   console.log('Listening on http://localhost:'+app_port);

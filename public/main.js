@@ -7,7 +7,7 @@ class Message {
     }
 }
 
-var socket = io();
+var socket = io.connect(window.location.origin,{query:`uid=${'12321421414'}&session=${'102-352-428'}`})
 
 var messagesList = [
     new Message(null,'Welcome to this chat room', 'inline')
