@@ -29,6 +29,7 @@ var app = new Vue({
     methods: {
         sendMessage(e) {
             e.preventDefault();
+            if (this.currentMessage.trim() == "") return;
             let msg = new Message(this.getUser(), this.currentMessage, null);
             socket.emit('chat message', msg);
             msg.type = "blue";
