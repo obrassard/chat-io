@@ -7,12 +7,14 @@ export class Session {
     hash: any;
     secret: string;
     users: any;
+    timestamp: number;
     
     constructor(identifier:string, password:string){
         this.identifier = identifier;
         this.hash = sha256(password);
         this.secret = crypto.randomBytes(64).toString('hex');
         this.users = {};
+        this.timestamp = Date.now();
     }
 
     //return userid
@@ -20,7 +22,7 @@ export class Session {
         let users : User[] = Object.values(this.users);
         let emailExist = users.map(u =>  u.email).some(e=> e == email);
         if (emailExist){
-            throw new Error(email);
+            throw { reason: "Duplicated email", email: email };
         }
 
         let id:string; 
@@ -34,7 +36,7 @@ export class Session {
 
     public getUser(id: string) : User {
         if (!this.users.hasOwnProperty(id)){
-            throw new Error('User not found');
+            throw 'User not found';
         }
         return this.users[id] ;
     }
@@ -46,7 +48,7 @@ export class Session {
     // Return the size of the user object after deletion
     public removeUser(id: string) : number {
         if (!this.users.hasOwnProperty(id)){
-            throw new Error('User not found');
+            throw 'User not found';
         }
         delete this.users[id]
         return Object.keys(this.users).length;

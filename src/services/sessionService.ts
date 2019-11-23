@@ -15,11 +15,11 @@ export class SessionService {
         let session = SessionDataStore.getSessionById(identifier);
 
         if (session == null) {
-            throw new Error('Expired session');
+            throw 'Expired session';
         }
 
         if (sha256(password) != session.hash ){
-            throw new Error('Invalid password');
+            throw 'Invalid password';
         }
 
         // Can throw error if email exist for this session
@@ -33,7 +33,7 @@ export class SessionService {
         let session = SessionDataStore.getSessionById(identifier);
 
         if (session == null) {
-            throw new Error('Expired session');
+            throw 'Expired session';
         }
 
         let ucount = session.removeUser(userId);
